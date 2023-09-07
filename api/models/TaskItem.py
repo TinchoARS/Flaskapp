@@ -9,4 +9,18 @@ class item:
         self.tarea = id_tarea
         
 
-    
+    @classmethod
+    def create_item(cls, item):
+        query= '''
+        INSERT INTO item (detalles, completado)
+        VALUES (%s, %s)
+        '''
+        
+        values = (item.detalles, item.completado)
+        
+        connection = DatabaseConnection.get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        return True

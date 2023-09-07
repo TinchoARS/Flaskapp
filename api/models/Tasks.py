@@ -3,14 +3,15 @@ from flask import Flask, request, jsonify
 from datetime import datetime
 
 class tarea:
-    def __init__(self, id_tarea, nombre, fecha_creacion, fecha_limite, completada, id_categoria):
+    def __init__(self, id_tarea, nombre, fecha_creacion, fecha_limite, completada, id_categoria, id_item):
        self.id_tarea = id_tarea
        self.nombre = nombre
        self.fecha_creacion = fecha_creacion
        self.fecha_limite = fecha_limite
        self.completada = completada
        self.categoria = id_categoria
-       
+       self.id_item = id_item
+              
     @classmethod
     def get_all_tareas(cls):
         query = '''
@@ -71,7 +72,7 @@ class tarea:
     def create_tarea(cls, tarea):
         query = '''
         INSERT INTO tarea (nombre, fecha_creacion, fecha_limite, completada)
-        VALUES (%s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s)
         '''
         values = (tarea.nombre, tarea.fecha_creacion, tarea.fecha_limite, tarea.completa)
         

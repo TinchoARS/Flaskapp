@@ -1,5 +1,6 @@
-from flask import request,jsonify
 from ..models.Category import Categoria
+from flask import request,jsonify
+
 
 class CategoryController():
     @classmethod

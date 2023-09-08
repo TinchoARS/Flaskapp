@@ -49,6 +49,7 @@ class Tarea:
             tarea.fecha_creacion,
             tarea.fecha_limite,
             tarea.completada,
+            tarea.fk_categoria
         FROM
             tarea
         WHERE

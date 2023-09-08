@@ -1,4 +1,4 @@
-from ..models.Tasks import tarea
+from ..models.Tasks import Tarea
 from flask import request,jsonify
 
 class CategoryController():

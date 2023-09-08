@@ -1,15 +1,15 @@
-from ..models.Tasks import Tarea
 from flask import request,jsonify
+from ..models.Category import Categoria
 
 class CategoryController():
     @classmethod
-    def create_category(self):
+    def create_category(self ):
         data = request.json
-        categoria = categoria(
+        categoria = Categoria(
             id_categoria= None,
-            nombre=data('nombre'),
-            descripcion=data('descripcion')  
+            nombre=data['nombre'],
+            descripcion=data['descripcion']  
         )
-        categoria.create_category(categoria)
+        Categoria.crear_categoria(categoria)
         return jsonify({}), 201
     

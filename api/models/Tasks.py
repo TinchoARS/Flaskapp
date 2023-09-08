@@ -9,7 +9,8 @@ class Tarea:
        self.fecha_creacion = fecha_creacion
        self.fecha_limite = fecha_limite
        self.completada = completada
-       self.id_categoria = id_categoria
+       self.categoria = id_categoria
+       self.id_item = id_item
               
     @classmethod
     def get_all_tareas(cls):
@@ -49,13 +50,12 @@ class Tarea:
             tarea.fecha_creacion,
             tarea.fecha_limite,
             tarea.completada,
-            tarea.fk_categoria
         FROM
             tarea
         WHERE
             tarea.id_tarea = %s
         '''
-        params = (id_tarea,)
+        params = (id_tarea, )
         result = DatabaseConnection.fetch_one(query, params)
         
         
@@ -65,8 +65,7 @@ class Tarea:
                 nombre = result[1],
                 fecha_creacion = result[2],
                 fecha_limite = result[3],
-                completada = result[4],
-                id_categoria= result[5]
+                completada = result[4]
             )
         else:
             return None

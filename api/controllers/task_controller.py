@@ -21,7 +21,7 @@ class TareaController:
     
     @classmethod
     def get_task_by_id(self,id_tarea):
-        tarea = Tarea.get_tarea_by_id(id_tarea)
+        tarea = tarea.get_task_by_id(id_tarea)
         if tarea:
             response = {
             "id_tarea": tarea.id_tarea,

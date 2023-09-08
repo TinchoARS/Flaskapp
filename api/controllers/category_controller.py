@@ -1,3 +1,4 @@
+from ..models.Tasks import tarea
 from flask import request,jsonify
 from ..models.Category import Categoria
 

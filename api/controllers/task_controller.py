@@ -40,11 +40,11 @@ class TareaController:
         data = request.json
         tarea = Tarea(
             id_tarea = None,
-            nombre = data.get('nombre'),
-            fecha_creacion = data.get('fecha_creacion'),
-            fecha_limite = data.get('fecha_limite'),
-            completada = data.get('completada'),
-            id_categoria=data.get('id_categoria')
+            nombre = data['nombre'],
+            fecha_creacion = data['fecha_creacion'],
+            fecha_limite = data['fecha_limite'],
+            completada = data['completada'],
+            id_categoria =data['fk_categoria']
         )
         Tarea.create_tarea(tarea)
         return jsonify({}), 201

@@ -74,7 +74,7 @@ class Tarea:
     @classmethod
     def create_tarea(cls, tarea):
         query = '''
-        INSERT INTO tarea (nombre, fecha_creacion, fecha_limite, completada,fk_categoria)
+        INSERT INTO tarea (nombre, fecha_creacion, fecha_limite, completada, fk_categoria)
         VALUES (%s, %s, %s, %s ,%s)
         '''
         values = (tarea.nombre, tarea.fecha_creacion, tarea.fecha_limite, tarea.completada ,tarea.id_categoria)

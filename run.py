@@ -1,4 +1,4 @@
-from PD import init_app
+from api import init_app
 app = init_app()
 
 if __name__ == "__main__" :

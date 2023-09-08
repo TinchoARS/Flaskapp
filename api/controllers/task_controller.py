@@ -1,43 +1,35 @@
-from ..models.Tasks import tarea
+from ..models.Tasks import Tarea
 from flask import request,jsonify
-
+from datetime import datetime
 class TareaController:
     @classmethod
     def get_all_tasks(cls):
-        tarea_lista = tarea.get_all_tasks()
+        tarea_lista = Tarea.get_all_tareas()
         
         response = []
         
         for tarea in tarea_lista:
-            categoria = tarea.get("categoria", {})
-            item = tarea.get("item", {})
             tarea_data = {
-                "categoria": {
-                    "nombre": categoria.get("nombre", ""),
-                    
-                },
-                "item" : {
-                    "detalles" : item.get("detalles", ""),
-                },
-                "id_tarea" : tarea.get("id_tarea", ""),
-                "nombre" : tarea.get("nombre", ""),
-                "fecha_creacion" : tarea.get("fecha_creacion", ""),
-                "fecha_limite" : tarea.get("fecha_limite", ""),
-                "completada": tarea.get("completada", "")
+                "id_tarea" : tarea["id_tarea"],
+                "nombre" : tarea["nombre"],
+                "fecha_creacion" : tarea["fecha_creacion"].strftime("%Y-%m-%d"),
+                "fecha_limite" : tarea["fecha_limite"].strftime("%Y-%m-%d"),
+                "completada": tarea["completada"]
             }
             response.append(tarea_data)
         return jsonify(response),200
     
     @classmethod
     def get_task_by_id(self,id_tarea):
-        tarea = tarea.get_task_by_id(id_tarea)
+        tarea = Tarea.get_tarea_by_id(id_tarea)
         if tarea:
             response = {
-                "id_tarea" : tarea.get("id_tarea", ""),
-                "nombre" : tarea.get("nombre", ""),
-                "fecha_creacion" : tarea.get("fecha_creacion", ""),
-                "fecha_limite" : tarea.get("fecha_limite", ""),
-                "completada": tarea.get("completada", "")
+            "id_tarea": tarea.id_tarea,
+            "nombre": tarea.nombre,
+            "fecha_creacion": tarea.fecha_creacion,
+            "fecha_limite": tarea.fecha_limite,
+            "completada": tarea.completada,
+            "id_categoria": tarea.id_categoria
             }
             return jsonify(response),200
         else:
@@ -46,12 +38,13 @@ class TareaController:
     @classmethod
     def create_task(self):
         data = request.json
-        tarea = tarea(
+        tarea = Tarea(
             id_tarea = None,
             nombre = data.get('nombre'),
             fecha_creacion = data.get('fecha_creacion'),
             fecha_limite = data.get('fecha_limite'),
-            completada = data.get('completada')
+            completada = data.get('completada'),
+            id_categoria=data.get('id_categoria')
         )
-        tarea.create_task(tarea)
+        Tarea.create_tarea(tarea)
         return jsonify({}), 201

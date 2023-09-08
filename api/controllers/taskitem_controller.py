@@ -1,14 +1,16 @@
-from ..models.Tasks import tarea
+from ..models.TaskItem import Item
 from flask import request,jsonify
 
 class ItemController():
     @classmethod
     def create_item(self):
         data = request.json
-        item = item(
+        print(data)
+        item = Item(
             id_item= None,
-            detalles=data('detalles'),
-            completado=data('completado')  
+            detalle=data['detalle'],
+            completado=data['completado'],
+            id_tarea=data['fk_tarea'],
         )
         item.create_item(item)
         return jsonify({}), 201
